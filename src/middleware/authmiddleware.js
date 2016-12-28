@@ -35,6 +35,7 @@ let generateAccessToken = function(req, res, next) {
 let respond = function(req, res) {
   res.status(200).json({
     user: req.user.username,
+    isAdmin: req.user.admin,
     token: req.token
   });
 }

@@ -9,10 +9,10 @@ var User = require("./src/models/user");
 
 
 //routes
-var questionRoutes = require("./src/routes/question");
-var answerRoutes = require("./src/routes/answer");
 var planRoutes = require("./src/routes/plan");
 var accountRoutes = require("./src/routes/account");
+var medsRoutes = require("./src/routes/medication");
+var codeRoutes = require("./src/routes/codes")
 
 //connect mongoose
 mongoose.connect("mongodb://localhost/perfect-profile");
@@ -35,10 +35,10 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 
 //config routes
-app.use("/v1/question", questionRoutes);
-app.use("/v1/question/", answerRoutes);
 app.use("/v1/plan", planRoutes);
-app.use("/v1/account/", accountRoutes);
+app.use("/v1/account", accountRoutes);
+app.use("/v1/meds", medsRoutes);
+app.use("/v1/codes", codeRoutes);
 
 server.listen(3000, function(){
   console.log("Server is Onnnnnnnnn!");

@@ -39,8 +39,8 @@ router.post("/login", passport.authenticate("local",
 
 //get all users
 // /v1/accout/
-router.get("/allusers", authMiddleWare.authenticate, authMiddleWare.isAdmin, function(req, res){
-  User.find({}, function(err, users){
+router.get("/", authMiddleWare.authenticate, authMiddleWare.isAdmin, function(req, res){
+  User.find({admin: false}, function(err, users){
     if (err) {
       return res.send(err);
     }
