@@ -37,7 +37,7 @@ router.get("/:id", authMiddleWare.authenticate,function(req, res){
 //Update
 // /v1/plan/:id(patientId)
 router.put("/:id", authMiddleWare.authenticate, authMiddleWare.isAdmin,function(req ,res) {
-  Plan.findById(req.params.id, function(err, foundPlan){
+  Plan.findOne({patient: req.params.id}, function(err, foundPlan){
     if (err){
       return res.status(500).send(err);
     }
