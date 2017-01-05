@@ -12,7 +12,8 @@ var MedSchema = new Schema({
   patientId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
-  }
+  },
+  updatedDate: String
 });
 
 module.exports = mongoose.model("Medication", MedSchema);

@@ -14,6 +14,7 @@ router.post("/:id/add", authMiddleWare.authenticate, authMiddleWare.isAdmin, fun
   newMed.disc = req.body.disc;
   newMed.patientId = req.params.id;
   newMed.author = req.user.id;
+  newMed.updatedDate = new Date().toDateString();
 
 
   newMed.save(function(err) {
@@ -64,6 +65,7 @@ router.put("/:medId", authMiddleWare.authenticate, authMiddleWare.isAdmin, funct
     med.name = req.body.name;
     med.disc = req.body.disc;
     med.author = req.user.id;
+    med.updatedDate = new Date().toDateString();
 
     med.save(function(err) {
       if (err) {
