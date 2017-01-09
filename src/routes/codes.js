@@ -4,12 +4,12 @@ var authMiddleWare = require("../middleware/authmiddleware");
 var Code = require("../models/codes")
 
 //add a code
-// /v1/code/add
-router.post("/add", function(req, res){
+// /v1/codes/add
+router.post("/add", authMiddleWare.authenticate, authMiddleWare.isAdmin, function(req, res){
   var newCode = new Code();
   newCode.code = req.body.code;
   newCode.role = req.body.role;
-  newCode.taken = "false";
+  newCode.taken = false;
 
   newCode.save(function(err) {
     if(err) {
@@ -27,6 +27,26 @@ router.get("/", function(req, res){
       return res.send(err);
     }
     res.json(codes);
+  });
+});
+
+//delete one code
+// /v1/codes/:codeId
+router.delete("/:codeId", function(req, res) {
+  Code.findById(req.params.codeId, function(err, code) {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    if (code === null) {
+      return res.status(404).send("Code was not found!");
+    }
+
+    Code.remove({_id: req.params.codeId}, function(err){
+      if (err) {
+        return res.send(err);
+      }
+      res.send("Code was removed!");
+    });
   });
 });
 
