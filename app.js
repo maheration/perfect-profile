@@ -7,6 +7,8 @@ var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
 var User = require("./src/models/user");
 
+// var host = process.env.HOST || "10.10.6.28";
+// var port = process.env.PORT || 3000;
 
 //routes
 var planRoutes = require("./src/routes/plan");
@@ -40,7 +42,7 @@ app.use("/v1/account", accountRoutes);
 app.use("/v1/meds", medsRoutes);
 app.use("/v1/codes", codeRoutes);
 
-server.listen(3000, function(){
+server.listen(3000,  function(){
   console.log("Server is Onnnnnnnnn!");
 });
 
