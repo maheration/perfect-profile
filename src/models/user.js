@@ -7,7 +7,8 @@ var userSchema = new Schema({
   password: String,
   firstName: String,
   lastName: String,
-  admin: Boolean
+  admin: Boolean,
+  deviceToken: String
 });
 
 //accountSchema.plugin(passportLocalMongoose);
