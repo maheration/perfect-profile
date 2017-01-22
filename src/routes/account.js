@@ -64,6 +64,8 @@ router.get("/:id/getauthorname", authMiddleWare.authenticate, function(req, res)
   });
 });
 
+//Send Notification
+// /v1/account/patientId/send_notif
 
 router.get("/:patientId/send_notif", function(req,res) {
   User.findById(req.params.patientId, function(err, user){
@@ -100,6 +102,23 @@ router.get("/:patientId/send_notif", function(req,res) {
         console.log(result);
     });
     return res.send("Notification was sent!! YAAAY");
+  });
+});
+
+//update deviceToken
+// /v1/account/:ptId/set_token
+router.put("/:ptId/set_token", authMiddleWare.authenticate, function(req, res){
+  User.findById(req.params.ptId, function(err, user){
+    if (err) {
+      return res.send(err);
+    }
+    user.deviceToken = req.body.deviceToken;
+    user.save(function(err){
+      if (err) {
+        return res.send(err);
+      }
+      res.send("Device Token was updated");
+    });
   });
 });
 
