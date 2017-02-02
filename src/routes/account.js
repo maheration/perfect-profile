@@ -67,7 +67,7 @@ router.get("/:id/getauthorname", authMiddleWare.authenticate, function(req, res)
 //Send Notification
 // /v1/account/patientId/send_notif
 
-router.get("/:patientId/send_notif", function(req,res) {
+router.get("/:patientId/send_notif", authMiddleWare.authenticate, function(req,res) {
   User.findById(req.params.patientId, function(err, user){
     if (err) {
       return res.send(err);
@@ -93,9 +93,10 @@ router.get("/:patientId/send_notif", function(req,res) {
     // // Play ping.aiff sound when the notification is received
     notification.sound = 'ping.aiff';
     // // Display the following message (the actual notification text, supports emoji)
-    notification.alert = 'Hello World \u270C';
+    notification.alert = 'Your profile has been updated 😊';
     // // Send any extra payload data with the notification which will be accessible to your app in didReceiveRemoteNotification
     notification.payload = {id: 123};
+    
     // // Actually send the notification
     apnProvider.send(notification, token).then(function(result) {
         // Check the result for any failed devices

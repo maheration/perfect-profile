@@ -5,7 +5,7 @@ var Code = require("../models/codes")
 
 //add a code
 // /v1/codes/add
-router.post("/add", authMiddleWare.authenticate, authMiddleWare.isAdmin, function(req, res){
+router.post("/add", function(req, res){
   var newCode = new Code();
   newCode.code = req.body.code;
   newCode.role = req.body.role;
