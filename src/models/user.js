@@ -8,7 +8,8 @@ var userSchema = new Schema({
   firstName: String,
   lastName: String,
   admin: Boolean,
-  deviceToken: String
+  deviceToken: String,
+  notif: Number
 });
 
 //accountSchema.plugin(passportLocalMongoose);

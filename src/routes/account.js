@@ -13,7 +13,7 @@ router.post("/register", function(req,res){
                           admin: req.body.admin,
                           firstName: req.body.firstName,
                           lastName: req.body.lastName,
-                          deviceToken: req.body.deviceToken}), req.body.password, function(err, account) {
+                          deviceToken: req.body.deviceToken, notif: 0}), req.body.password, function(err, account) {
                             if(err) {
                               return res.send(err);
                             }
@@ -64,6 +64,23 @@ router.get("/:id/getauthorname", authMiddleWare.authenticate, function(req, res)
   });
 });
 
+//reset bagdeNumber
+// /v1/account/:id(userId)/reset
+router.get("/:id/reset", function(req, res) {
+  User.findById(req.params.id, function(err, user){
+    if (err) {
+      return res.send(err);
+    }
+    user.notif = 0;
+    user.save(function(err){
+      if (err) {
+        return res.send(err);
+      }
+    });
+    return res.send("Just resetted the badge");
+  });
+});
+
 //Send Notification
 // /v1/account/patientId/send_notif
 
@@ -82,6 +99,12 @@ router.get("/:patientId/send_notif", authMiddleWare.authenticate, function(req,r
         },
         production: false // Set to true if sending a notification to a production iOS app
     });
+    user.notif = user.notif + 1;
+    user.save(function(err){
+      if (err) {
+        return res.send(err);
+      }
+    });
     // // Prepare a new notification
     var notification = new apn.Notification();
     // // Specify your iOS app's Bundle ID (accessible within the project editor)
@@ -89,14 +112,14 @@ router.get("/:patientId/send_notif", authMiddleWare.authenticate, function(req,r
     // // Set expiration to 1 hour from now (in case device is offline)
     notification.expiry = Math.floor(Date.now() / 1000) + 3600;
     // // Set app badge indicator
-    notification.badge = 3;
+    notification.badge = user.notif;
     // // Play ping.aiff sound when the notification is received
     notification.sound = 'ping.aiff';
     // // Display the following message (the actual notification text, supports emoji)
     notification.alert = 'Your profile has been updated 😊';
     // // Send any extra payload data with the notification which will be accessible to your app in didReceiveRemoteNotification
     notification.payload = {id: 123};
-    
+
     // // Actually send the notification
     apnProvider.send(notification, token).then(function(result) {
         // Check the result for any failed devices
