@@ -1,1 +1,1 @@
-This project is designed for GN clinic at University of Alberta. It meant to be a good communication tool between patients and healthcare team
+This project is designed for GN clinic. It meant to be a good communication tool between patients and healthcare team
