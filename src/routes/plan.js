@@ -19,7 +19,7 @@ router.post("/:id/add", authMiddleWare.authenticate, authMiddleWare.isAdmin, fun
     if (err) {
       return res.send(err);
     }
-    res.send("New plan was saved BIATCH");
+    res.send("New plan was saved");
   });
 });
 
