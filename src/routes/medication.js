@@ -21,7 +21,7 @@ router.post("/:id/add", authMiddleWare.authenticate, authMiddleWare.isAdmin, fun
     if (err) {
       return res.send(err);
     }
-    res.send("New med was saved BITCH!!!!");
+    res.send("New med was saved!!!!");
   });
 });
 
