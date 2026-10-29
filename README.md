@@ -56,6 +56,3 @@ Developed in **2017–2018**. This repository preserves the original work as a h
 
 I provided the code to the University of Alberta for possible implementation. I cannot confirm subsequent implementation or adoption, and no measured clinical or operational outcomes are claimed.
 
-## Technical context
-
-This repository preserves an early Node.js/Mongoose implementation. The original configuration uses a local MongoDB database and port 3000. It has known authorization and security limitations, and is not intended for clinical deployment or use with real patient data. Historical credentials must not be reused. A current runnable installation and end-to-end test have not been verified.
