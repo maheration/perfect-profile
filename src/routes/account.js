@@ -32,7 +32,7 @@ router.post("/login", passport.authenticate("local",
    //logout
   router.get("/logout", authMiddleWare.authenticate, function(req, res){
      req.logout();
-     res.status(200).send("Logged out BITCH");
+     res.status(200).send("Logged out");
    });
 
  router.get("/me", authMiddleWare.authenticate, function(req, res) {
